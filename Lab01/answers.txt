@@ -1,0 +1,41 @@
+Ex 6.6
+Input:
+1
+2
+1 
+2 
+Output:
+3 
+
+Ex 6.4
+Input:
+Jun
+2022
+Output:
+30
+
+Ex 6.5
+Input:
+4
+4 3 1 2
+Output:
+1 2 3 4
+
+Ex 2.5:
+Input:
+4 
+6
+Output:
+10
+-2
+24
+0.6666
+
+Ex 2.6
+Input:
+1
+1
+1
+Output:
+-1
+

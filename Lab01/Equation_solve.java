@@ -2,6 +2,7 @@
 import javax.swing.JOptionPane;
 
 public class Equation_solve {
+	//Linear equation
 	public static void linearEquation(double a, double b) {
 		if (a != 0) {
 			JOptionPane.showMessageDialog(null, "x =" + (-b / a),"Result", JOptionPane.INFORMATION_MESSAGE);
@@ -14,6 +15,7 @@ public class Equation_solve {
 		}
 	}
 	
+	//Linear system equation
 	public static void linearSystemEquation(double a1, double b1, double c1, double a2, double b2, double c2) {
 		if (a1 * b2 - a2 * b1 != 0) {
 			JOptionPane.showMessageDialog(null, "x1 = " + ((c1 * b2 - c2 * b1) / (a1 * b2 - a2 * b1)) + "\n" + "x2 = " + + ((c1 * a2 - c2 * a1) / (b1 * a2 - a1 * b2)),"Result", JOptionPane.INFORMATION_MESSAGE);
@@ -26,6 +28,7 @@ public class Equation_solve {
 		}
 	}
 	
+	//Second degree equation
 	public static void secondDegreeEquation(double a, double b, double c) {
 		double delta = Math.pow(b,2) - 4*a*c;
 		if (delta < 0) {
@@ -48,6 +51,7 @@ public class Equation_solve {
 	}
 	
 	public static void main(String[] args) {
+		//Input and display result
 		int option = Integer.parseInt(JOptionPane.showInputDialog(null,"What type of equation you want to solve?\n" + 
 				"1: The first-degree equation (linear equation) with one variable\n" +
 				"2: The system of first-degree equations (linear system) with two variables\n" + 

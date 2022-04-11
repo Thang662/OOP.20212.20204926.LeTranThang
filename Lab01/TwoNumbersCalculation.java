@@ -13,7 +13,7 @@ public class TwoNumbersCalculation {
 		rs += "Sum: " + (num1 + num2) + "\n";
 		rs += "Difference: " + (num1 - num2) + "\n";
 		rs += "Product: " + (num1 * num2) + "\n";
-		if(num2 != 0){
+		if (num2 != 0) {
 			rs += "Division: " + (num1 / num2); 
 		}
 		else {

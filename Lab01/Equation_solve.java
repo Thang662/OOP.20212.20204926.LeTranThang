@@ -1,112 +1,92 @@
-// Ex 2.2.6
+import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+public class Equation_solve{
+    
+    // Linear equation ax + b = 0
+    public static void LinearEqua(double a, double b){
+        System.out.println("x= " + (-b/a));
+    }
+    public static boolean checkLinear(double a){
+        if (a != 0){
+            return true;
+        }
+        return false;
+    }
 
-public class Equation_solve {
+    // Linear system
+    public static double computeD(double a11, double a12, double a21, double a22){
+        return a11*a22 - a21*a12;
+    }
 
-	public static void main(String[] args) {
-		int userInput = Integer.parseInt(JOptionPane.showInputDialog(null,"What type of equation you want to solve? \n" + 
-				"1- The 1st-degree equation (linear equation) with one variable \n " +
-				"2- The system of 1st-degree equations (linear system) with two variables \n "+ 
-				"3- The second-degree equation with one variable \n", "Calculator", JOptionPane.QUESTION_MESSAGE));
-		if (userInput > 4 || userInput < 1 ) {
-			JOptionPane.showMessageDialog(null,"Please try again!", "Invalid value", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			
-			if (userInput == 1) {
-				
-				String strA = JOptionPane.showInputDialog(null,"Please type A:	", "Value A", JOptionPane.INFORMATION_MESSAGE);
-				String strB = JOptionPane.showInputDialog(null,"Please type B:	", "Value B", JOptionPane.INFORMATION_MESSAGE);
-				double a = Double.parseDouble(strA);
-				double b = Double.parseDouble(strB);
-				firstDegreeOneVariable(a,b);
-			}
-			
-			else if (userInput == 2)	{
-				String firstEquation = JOptionPane.showInputDialog(null, "Please enter the coefficient for the first equation: ", "First equation", JOptionPane.INFORMATION_MESSAGE);
-				String secondEquation  = JOptionPane.showInputDialog(null, "Please enter the coefficient for the second equation: ", "Second equation", JOptionPane.INFORMATION_MESSAGE);
-				String[] firstArray = firstEquation.split(",");
-				String[] secondArray = secondEquation.split(",");
-				double a11 = Double.parseDouble(firstArray[0]) ;
-				double a12 = Double.parseDouble(firstArray[1]) ;
-				double b1 = Double.parseDouble(firstArray[2]) ;
-				
-				double a21 = Double.parseDouble(secondArray[0]) ;
-				double a22 = Double.parseDouble(secondArray[1]) ;
-				double b2 = Double.parseDouble(secondArray[2]) ;
-				systemOfLinearEquation(a11, a12, a21, a22, b1, b2);
-			}
-			else if (userInput == 3) {
-				String strrA = JOptionPane.showInputDialog(null,"Please input A:	", "Input A", JOptionPane.INFORMATION_MESSAGE);
-				String strrB = JOptionPane.showInputDialog(null,"Please input B:	", "Input B", JOptionPane.INFORMATION_MESSAGE);
-				String strrC = JOptionPane.showInputDialog(null,"Please input C:	", "Input C", JOptionPane.INFORMATION_MESSAGE);
-				double A = Double.parseDouble(strrA);
-				double B = Double.parseDouble(strrB);
-				double C = Double.parseDouble(strrC);
-				secondDegreeEquationOneVariable(A, B, C);
-			}
-		}
-	}
-	
-	
-	public static void firstDegreeOneVariable(double a, double b) {
-		if (a != 0) {
-			double res = (-b/a);
-			JOptionPane.showMessageDialog(null, "x= "+ res, "Solution", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "This equation does not have any solution", "Result showing", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
-	
-	
-	public static double computeDetermination(double a11, double a12, double a21, double a22) {
-		return (a22 * a11) - (a21 * a12);
-	}
-	
-	public static void systemOfLinearEquation(double a11, double a12, double a21, double a22, double b1, double b2) {
-		if (computeDetermination(a11,a12,a12,a22) != 0) {
-			double x1 = (b1 * a22 - b2 * a12) / (a11 * a22 - a21 * a12);
-			double x2 = (b1 * a21 - b2 * a11) / (a12 * a21 - a11 * a22);
-			String output = "";
-			output += "x1= " + x1 + "\n";
-			output += "x2= " + x2;
-			JOptionPane.showMessageDialog(null, output,"Solution", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			if ( (a12 * a22 == a11 * a21) && (b1 * a22 != a11 * b2 )) {
-				JOptionPane.showMessageDialog(null,"This system does not have solution","Solution", JOptionPane.INFORMATION_MESSAGE);
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "This system has infinitely number of solutions","Solution", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-	}
-	
-	public static void secondDegreeEquationOneVariable(double a, double b, double c) {
-		double delta = Math.pow(b,2) - 4*a*c;
-		if (delta < 0) {
-			JOptionPane.showMessageDialog(null, "This equation does not have solution", "Solution", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else if (delta == 0) {
-			double x = -b/(2*a);
-			String output = "This equation has single solution x= " + x;
-			JOptionPane.showMessageDialog(null, output, "Solution", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			double tmp = Math.sqrt(delta);
-			double x1 = (-b + tmp) / (2 * a);
-			double x2 = (-b - tmp) / (2 * a);
-			String output = "Solutions of the equation is: \n";
-			output += "x1= " + x1 + "\n";
-			output += "x2= " + x2;
-			JOptionPane.showMessageDialog(null, output, "Solution", JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-	}
-	
-	
-	
-	
+    public static void linearSystem(double a11, double a12, double b1, double a21, double a22, double b2){
+        System.out.println("x1 =" + ((b1*a22 - b2 * a12)/(a11*a22 - a12 *a21)));
+        System.out.println("x2 =" + ((b1*a21 - b2 * a11)/(a12 *a21 - a22 *a11)));
+    }
+
+    // Second order Equation
+
+    public static double computeDelta(double a, double b, double c){
+        return Math.pow(b, 2) - 4 * a * c; 
+    }
+
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1 - Linear Equation");
+        System.out.println("2 - Linear System");
+        System.out.println("3 - Second order Equation");
+        System.out.println("What type of equation you want to sole? ");
+        int input = sc.nextInt();
+        if (input == 1){
+            System.out.print("Input a =");
+            int a = sc.nextInt();
+            System.out.print("Input b =");
+            int b = sc.nextInt();
+            if (checkLinear(a)){
+                LinearEqua(a, b);
+            }
+            else {
+                System.out.println("a = 0");
+            }
+        }
+        else if (input == 2){
+            System.out.print("Input a11 =");
+            double a11 = sc.nextDouble();
+            System.out.print("Input a12 =");
+            double a12 = sc.nextDouble();
+            System.out.print("Input b1 =");
+            double b1 = sc.nextDouble();
+            System.out.print("Input a21 =");
+            double a21 = sc.nextDouble();
+            System.out.print("Input a22 =");
+            double a22 = sc.nextDouble();
+            System.out.print("Input b2 =");
+            double b2 = sc.nextDouble();
+            if ( computeD(a11, a12, a21, a22) == 0){
+                System.out.println("This system has no solution or infinite solution");
+            }
+            else {
+                linearSystem(a11, a12, b1, a21, a22, b2);
+            }
+        }
+        else {
+            System.out.print("Input a =");
+            double a = sc.nextDouble();
+            System.out.print("Input b =");
+            double b = sc.nextDouble();
+            System.out.print("Input c =");
+            double c = sc.nextDouble();
+            if (computeDelta(a, b, c) < 0){
+                System.out.println("This equation has no solution");
+            }
+            else if (computeDelta(a, b, c) == 0){
+                System.out.println("This equation has unique solution x=" + (-b/2/a));
+            }
+            else {
+                System.out.println("x1 = "+ (-b + Math.sqrt(computeDelta(a, b, c))/(2*a)));
+                System.out.println("x2 = "+ (-b - Math.sqrt(computeDelta(a, b, c))/(2*a)));
+            }
+        }
+    }
+
+
 }

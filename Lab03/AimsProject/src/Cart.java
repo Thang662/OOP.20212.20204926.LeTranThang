@@ -18,6 +18,22 @@ public class Cart {
 		return qtyOrdered;
 	}
 	
+	// Remove all the dvd(s) with the same title from the current cart
+		public int removeDigitalVideoDisc(DigitalVideoDisc disc) {
+			int numDvdRemoved = 0;
+			for (int i = 0; i < qtyOrdered; i++) {
+				if (itemsOrdered[i].getTitle() == disc.getTitle()) {
+					for (int j = i + 1; j < qtyOrdered; j ++) {
+						itemsOrdered[j - 1] = itemsOrdered[j];
+					}
+					i--;
+					numDvdRemoved++;
+					qtyOrdered--;
+				}
+			}
+			return numDvdRemoved;
+		}
+		
 	// Compute the cost of the cart 
 	public float totalCost() {
 		float cost = 0;

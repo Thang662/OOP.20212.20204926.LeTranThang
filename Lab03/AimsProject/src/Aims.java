@@ -18,7 +18,7 @@ public class Aims {
 //		anOrder.addDigitalVideoDisc(dvd4);
 		
 		// Remove dvd from the cart
-//		anOrder.removeDigitalVideoDisc(dvd3);
+		anOrder.removeDigitalVideoDisc(dvd3);
 //		DigitalVideoDisc dvdList[] = {dvd1, dvd2, dvd3, dvd4};
 //		anOrder.addDigitalVideoDisc(dvdList);
 //		anOrder.addDigitalVideoDisc(dvd4, dvd2);

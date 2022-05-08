@@ -14,18 +14,18 @@ public class Aims {
 		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 		anOrder.addDigitalVideoDisc(dvd3);
 		
-//		DigitalVideoDisc dvd4 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
-//		anOrder.addDigitalVideoDisc(dvd4);
+		DigitalVideoDisc dvd4 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
+		anOrder.addDigitalVideoDisc(dvd4);
 		
 		// Remove dvd from the cart
 		anOrder.removeDigitalVideoDisc(dvd3);
-//		DigitalVideoDisc dvdList[] = {dvd1, dvd2, dvd3, dvd4};
-//		anOrder.addDigitalVideoDisc(dvdList);
-//		anOrder.addDigitalVideoDisc(dvd4, dvd2);
-//		anOrder.addDigitalVideoDisc(dvd1, 4);
-//		anOrder.addDigitalVideoDisc(dvd1, 4);
-//		anOrder.addDigitalVideoDisc(dvd1, 4);
-//		anOrder.addDigitalVideoDisc(dvd1, 4);
+		DigitalVideoDisc dvdList[] = {dvd1, dvd2, dvd3, dvd4};
+		anOrder.addDigitalVideoDisc(dvdList);
+		anOrder.addDigitalVideoDisc(dvd4, dvd2);
+		anOrder.addDigitalVideoDisc(dvd1, 4);
+		anOrder.addDigitalVideoDisc(dvd1, 4);
+		anOrder.addDigitalVideoDisc(dvd1, 4);
+		anOrder.addDigitalVideoDisc(dvd1, 4);
 		
 		// print total cost of the items in the cart
 		System.out.println("Total Cost is: ");

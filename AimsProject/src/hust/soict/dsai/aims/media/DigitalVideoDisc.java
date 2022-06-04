@@ -1,16 +1,11 @@
-package hust.soict.dsai.aims.disc;
+package hust.soict.dsai.aims.media;
 import java.time.LocalDate;
 
-public class DigitalVideoDisc {
-	private String title;
-	private String category;
+public class DigitalVideoDisc extends Media {
 	private String director;
 	private int length;
-	private float cost;
 	private LocalDate dateAdded = LocalDate.now();
 	private static int nbDigitalVideoDisc = 0;
-	private int id = 0;
-	
 	// Constructor with title, category, director, length, cost
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
 		super();
@@ -52,23 +47,11 @@ public class DigitalVideoDisc {
 		DigitalVideoDisc.nbDigitalVideoDisc++;
 	}
 	
-	public String getTitle() {
-		return title;
-	}
-	public String getCategory() {
-		return category;
-	}
 	public String getDirector() {
 		return director;
 	}
-	public Integer getLength() {
+	public int getLength() {
 		return length;
-	}
-	public Float getCost() {
-		return cost;
-	}
-	public int getId() {
-		return id;
 	}
 	public LocalDate getDateAdded() {
 		return dateAdded;
@@ -97,8 +80,5 @@ public class DigitalVideoDisc {
 		}
 		return check;
 	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
 }
+

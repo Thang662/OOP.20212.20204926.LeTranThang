@@ -153,16 +153,18 @@ public class Aims {
 					if (updateStoreOption == 1) {
 						Aims.addMediaMenu();
 						addMediaMenuOption = Aims.input(3);
-						System.out.println("Enter the title");
-						tempStr1 = sc.nextLine();
-						System.out.println("Enter the category");
-						tempStr2 = sc.nextLine();
-						System.out.println("Enter the cost");
-						tempFloat = sc.nextFloat(); sc.nextLine();
-						if (addMediaMenuOption == 1) store.addMedia(new DigitalVideoDisc(tempStr1, tempStr2, tempFloat));
-						else if (addMediaMenuOption == 2) store.addMedia(new CompactDisc(tempStr1, tempStr2, tempFloat));
-						else store.addMedia(new Book(tempStr1, tempStr2, tempFloat));
-						Aims.promptEnterKey();
+						if (addMediaMenuOption != 0) {
+							System.out.println("Enter the title");
+							tempStr1 = sc.nextLine();
+							System.out.println("Enter the category");
+							tempStr2 = sc.nextLine();
+							System.out.println("Enter the cost");
+							tempFloat = sc.nextFloat(); sc.nextLine();
+							if (addMediaMenuOption == 1) store.addMedia(new DigitalVideoDisc(tempStr1, tempStr2, tempFloat));
+							else if (addMediaMenuOption == 2) store.addMedia(new CompactDisc(tempStr1, tempStr2, tempFloat));
+							else store.addMedia(new Book(tempStr1, tempStr2, tempFloat));
+							Aims.promptEnterKey();
+						}
 					}
 					// Remove a media from the store
 					else if (updateStoreOption == 2) {

@@ -1,13 +1,33 @@
 package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Book extends Media {
 	private ArrayList<String> authors = new ArrayList<String>();
 	
 	public Book() {
-		// TODO Auto-generated constructor stub
+		super();
+	}	
+
+	// Constructor with title, category, cost, authors
+	public Book(String title, String category, float cost, String[] authors) {
+		super(title, category, cost);
+		this.authors.addAll(Arrays.asList(authors));
 	}
 	
+	// Constructor with title, category, cost
+	public Book(String title, String category, float cost) {
+		super(title, category, cost);
+	}
+	
+	// Constructor with title
+	public Book(String title) {
+		super(title);
+	}
+	
+	/*
+	 * Getters and setters
+	 */
 	public ArrayList<String> getAuthors() {
 		return authors;
 	}
@@ -35,5 +55,13 @@ public class Book extends Media {
 		else {
 			System.out.println("The author's name is not in the book");
 		}
+	}
+	
+	// Format the way to print book
+	@Override
+	public String toString() {
+		String str = String.format("Book - Title:%-20s - Category:%-20s - Author(s):%-20s - Cost:%.2f$", this.getTitle(),
+				this.getCategory(), this.getAuthors(), this.getCost());
+		return str;
 	}
 }

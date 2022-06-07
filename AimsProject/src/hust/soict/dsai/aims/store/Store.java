@@ -1,20 +1,21 @@
 package hust.soict.dsai.aims.store;
 import java.util.ArrayList;
 
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.utils.MediaUtils;
 public class Store {
-	private static ArrayList<DigitalVideoDisc> itemsInStore = new ArrayList<DigitalVideoDisc>();
+	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 	
-	// Add a list of dvd
-	public static void addDVD(DigitalVideoDisc... dvds) {
-		for (DigitalVideoDisc dvd: dvds){
-			itemsInStore.add(dvd);
+	// Add a list of media
+	public  void addMedia(Media... medias) {
+		for (Media media: medias){
+			itemsInStore.add(media);
 			System.out.println("The disc has been added to the store");
 		}
 	}
 	
-	// Remove all the dvd(s) with the same title from the store
-	public static void removeDVD(String title) {
+	// Remove all the media(s) with the same title from the store
+	public  void removeMedia(String title) {
 		int i = 0;
 		boolean check = false;
 		while (i < itemsInStore.size()) {
@@ -25,26 +26,51 @@ public class Store {
 			}
 			i += 1;
 		}
-		if (!check) System.out.println("There's is no dvd with that name!");
-		else System.out.println("Successfully delete the dvd(s) from the store");
+		if (!check) System.out.println("There's is no media with that name!");
+		else System.out.println("Successfully delete the media(s) with name from the store");
 	}
 	
-	// Display all the dvds in the store
-	public static void display() {
-		System.out.println("Display all the dvds available in the store");
+	// Display all the medias in the store
+	public  void display() {
+		System.out.println("**************************CART**************************");
+		System.out.println("Ordered Items:");
+		Media temp;
+		for (int i = 0; i < this.itemsInStore.size(); i++) {
+			for (int j = i + 1; j < this.itemsInStore.size(); j++) {
+				if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) < 0) {
+					temp = this.itemsInStore.get(i);
+					this.itemsInStore.set(i, this.itemsInStore.get(j));
+					this.itemsInStore.set(j, temp);
+				}
+				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) < 0 
+						&& MediaUtils.compareByTitle(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0) {
+					temp = this.itemsInStore.get(i);
+					this.itemsInStore.set(i, this.itemsInStore.get(j));
+					this.itemsInStore.set(j, temp);
+				}
+				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) < 0
+						&& MediaUtils.compareByTitle(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0
+						&& MediaUtils.compareByCost(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0) {
+					temp = this.itemsInStore.get(i);
+					this.itemsInStore.set(i, this.itemsInStore.get(j));
+					this.itemsInStore.set(j, temp);
+				}
+			}
+		}
+		System.out.println("Display all the medias available in the store");
 		for (int i = 0; i < itemsInStore.size(); i++) {
 			System.out.println(String.format("%02d", i + 1) + "." + itemsInStore.get(i).toString());
 		}
 	}
 	
-	// Search dvd by title
-	public static DigitalVideoDisc searchByTitle(String title) {
-		DigitalVideoDisc tempdvd = null;
+	// Search media by title
+	public  Media searchByTitle(String title) {
+		Media tempMedia = null;
 		for (int i = 0; i < itemsInStore.size(); i++) {
 			if (itemsInStore.get(i).getTitle().equalsIgnoreCase(title)) {
-				tempdvd = itemsInStore.get(i);
+				tempMedia = itemsInStore.get(i);
 			};
 		}
-		return tempdvd;
+		return tempMedia;
 	}
 }

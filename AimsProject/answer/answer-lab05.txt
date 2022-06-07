@@ -1,0 +1,3 @@
+- Which classes are aggregates of other classes?
++ Class Cart and class Store aggregate from class Media
++ Class CompactDisc aggregates from class Track

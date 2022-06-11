@@ -1,5 +1,6 @@
 package hust.soict.dsai.aims;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,8 +9,13 @@ import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.media.Playable;
+import hust.soict.dsai.aims.screen.CartScreen;
+import hust.soict.dsai.aims.screen.CartScreenController;
+import hust.soict.dsai.aims.screen.StoreScreen;
 import hust.soict.dsai.aims.store.Store;
 public class Aims {
+
 	public static void main(String[] args) {
 //		// Create a new cart
 //		Cart anOrder = new Cart();
@@ -67,11 +73,16 @@ public class Aims {
 		boolean stopUpdateStore = false;
 		boolean stopCartMenu = false;
 		int menuOption, storeMenuOption, updateStoreOption, cartMenuOption, filterCartOption, sortCartOption, addMediaMenuOption, idNum;
-		String tempStr1, tempStr2;
+		String tempStr1, tempStr2, playableMedia;
 		float tempFloat;
 		Cart anOrder = new Cart();
 		Scanner sc = new Scanner(System.in);
 		Media tempMedia = null;
+		ArrayList<Media> tempMediaList = null;
+		
+//		anOrder.addMedia(book5, book1, cd1);
+//		new CartScreen(anOrder);
+//		new StoreScreen(store);
 		/*
 		 * AIMS Application
 		 * The menu consists 3 parts: Store menu, Update store menu, Cart menu
@@ -103,7 +114,7 @@ public class Aims {
 			if (menuOption == 1) {
 				while (!stopStoreMenu) {
 					Aims.storeMenu();
-					storeMenuOption = Aims.input(3);
+					storeMenuOption = Aims.input(4);
 					// See media's details
 					if (storeMenuOption == 1) {
 						System.out.println("----------------------------------------------------------------------------------");
@@ -119,7 +130,10 @@ public class Aims {
 					}
 					// Add a media to the cart
 					else if (storeMenuOption == 2) {
-						store.display();
+						tempMediaList = store.display();
+						for (int i = 0; i < tempMediaList.size(); i++) {
+							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).toString());
+						}
 						System.out.println("----------------------------------------------------------------------------------");
 						System.out.println("Please enter the title of the media to add to the cart:");
 						tempMedia = store.searchByTitle(sc.nextLine());
@@ -135,6 +149,26 @@ public class Aims {
 					else if (storeMenuOption == 3) {
 						menuOption = 3;
 						stopStoreMenu = true;
+					}
+					else if (storeMenuOption == 4) {
+						tempMediaList = store.display();
+						for (int i = 0; i < tempMediaList.size(); i++) {
+							playableMedia = (tempMediaList.get(i) instanceof Playable) ? " - Playble" : "";
+							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).toString() + playableMedia);
+						}
+						System.out.println("----------------------------------------------------------------------------------");
+						System.out.println("Please enter the title of the media to add to the cart:");
+						tempMedia = store.searchByTitle(sc.nextLine());
+						if (tempMedia == null) {
+							System.out.println("There's no matching media in the store!");
+						}
+						else if (tempMedia instanceof Playable){
+							((Playable) tempMedia).play();
+						}
+						else {
+							System.out.println("Can't play this media!");
+						}
+						Aims.promptEnterKey();
 					}
 					// Go back to menu
 					else if (storeMenuOption == 0) {
@@ -274,6 +308,7 @@ public class Aims {
 			System.out.println("1. See a media’s details");
 			System.out.println("2. Add a media to cart");
 			System.out.println("3. See current cart");
+			System.out.println("4. Play a media in the store");
 			System.out.println("0. Back");
 			System.out.println("--------------------------------");
 			System.out.println("Please choose a number: 0-1-2-3");

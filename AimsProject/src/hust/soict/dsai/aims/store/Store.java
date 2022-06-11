@@ -6,11 +6,18 @@ import hust.soict.dsai.aims.utils.MediaUtils;
 public class Store {
 	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 	
+	/*
+	 * Getters and setters
+	 */
+	public ArrayList<Media> getItemsInStore() {
+		return itemsInStore;
+	}
+	
 	// Add a list of media
 	public  void addMedia(Media... medias) {
 		for (Media media: medias){
 			itemsInStore.add(media);
-			System.out.println("The disc has been added to the store");
+			System.out.println("The media has been added to the store");
 		}
 	}
 	
@@ -31,8 +38,8 @@ public class Store {
 	}
 	
 	// Display all the medias in the store
-	public  void display() {
-		System.out.println("**************************CART**************************");
+	public ArrayList<Media> display() {
+		System.out.println("**************************STORE**************************");
 		System.out.println("Ordered Items:");
 		Media temp;
 		for (int i = 0; i < this.itemsInStore.size(); i++) {
@@ -58,9 +65,7 @@ public class Store {
 			}
 		}
 		System.out.println("Display all the medias available in the store");
-		for (int i = 0; i < itemsInStore.size(); i++) {
-			System.out.println(String.format("%02d", i + 1) + "." + itemsInStore.get(i).toString());
-		}
+		return itemsInStore;
 	}
 	
 	// Search media by title

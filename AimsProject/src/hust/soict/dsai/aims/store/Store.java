@@ -49,15 +49,15 @@ public class Store {
 					this.itemsInStore.set(i, this.itemsInStore.get(j));
 					this.itemsInStore.set(j, temp);
 				}
-				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) < 0 
-						&& MediaUtils.compareByTitle(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0) {
+				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) == 0 
+						&& MediaUtils.compareByTitle(this.itemsInStore.get(i), this.itemsInStore.get(j)) < 0) {
 					temp = this.itemsInStore.get(i);
 					this.itemsInStore.set(i, this.itemsInStore.get(j));
 					this.itemsInStore.set(j, temp);
 				}
-				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) < 0
+				else if (this.itemsInStore.get(j).getClass().toString().compareTo(this.itemsInStore.get(i).getClass().toString()) == 0
 						&& MediaUtils.compareByTitle(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0
-						&& MediaUtils.compareByCost(this.itemsInStore.get(i), this.itemsInStore.get(j)) == 0) {
+						&& MediaUtils.compareByCost(this.itemsInStore.get(i), this.itemsInStore.get(j)) < 0) {
 					temp = this.itemsInStore.get(i);
 					this.itemsInStore.set(i, this.itemsInStore.get(j));
 					this.itemsInStore.set(j, temp);

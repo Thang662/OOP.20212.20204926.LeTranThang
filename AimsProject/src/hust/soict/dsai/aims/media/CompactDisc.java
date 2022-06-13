@@ -73,6 +73,7 @@ public class CompactDisc extends Disc implements Playable {
 	}
 	
 	// Compute the length of all track(s)
+	@Override
 	public int getLength() {
 		int totalLength = 0;
 		for (Track track: this.tracks) {
@@ -98,8 +99,8 @@ public class CompactDisc extends Disc implements Playable {
 	// Format the way to print cd
 	@Override
 	public String toString() {
-		String str = String.format("CD - Title:%-20s - Category:%-20s - Director:%-20s - Artist:%-20s - Length:%-20d - Cost:%.2f$", this.getTitle(),
-				this.getCategory(), this.getDirector(), this.getArtist(), this.getLength(), this.getCost());
+		String str = String.format("CD - Title:%-20s - Category:%-20s - Artist:%-20s - Director:%-20s - Length:%-10d - Cost:%.2f$", this.getTitle(),
+				this.getCategory(),this.getArtist(), this.getDirector(), this.getLength(), this.getCost());
 		return str;
 	}
 }

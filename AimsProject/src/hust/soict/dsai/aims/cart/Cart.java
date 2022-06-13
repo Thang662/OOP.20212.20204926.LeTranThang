@@ -4,16 +4,29 @@ import hust.soict.dsai.aims.media.Media;
 
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.utils.MediaUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered =  FXCollections.observableArrayList();
+	
+	/*
+	 * Getters and setters
+	 */
+	public ObservableList<Media> getItemsOrdered() {
+		return itemsOrdered;
+	}
 	
 	// Add a single media to the current cart
 	public void addMedia(Media media) {
-		if (this.itemsOrdered.size() + 1 <= MAX_NUMBERS_ORDERED) {
+		if (this.itemsOrdered.size() + 1 <= MAX_NUMBERS_ORDERED & !(this.itemsOrdered.contains(media))) {
 			this.itemsOrdered.add(media);
 			System.out.println("The media has been added");
+		}
+		else if (this.itemsOrdered.contains(media)) {
+			System.out.println("The media " + media.getTitle() + " is already in the cart");
 		}
 		else {
 			System.out.println("The cart is almost full");
@@ -24,9 +37,14 @@ public class Cart {
 	public void addMedia(Media... medias) {
 		if (this.itemsOrdered.size() + medias.length <= MAX_NUMBERS_ORDERED) {
 			for (Media media: medias) {
-				this.itemsOrdered.add(media);
+				if (this.itemsOrdered.contains(media)) {
+					System.out.println("The media " + media.getTitle() + " is already in the cart");
+				}
+				else {
+					this.itemsOrdered.add(media);
+					System.out.println("The media has been added");
+				}
 			}
-			System.out.println("The media has been added");
 		}
 		else {
 			System.out.println("The cart is almost full");
@@ -34,24 +52,35 @@ public class Cart {
 	}
 		
 	// Add a media with multiple times to the current cart
-	public void addMedia(Media media, int times) {
-		if (this.itemsOrdered.size() + times <= MAX_NUMBERS_ORDERED) {
-			for (int i = 0; i < times; i++) {
-				this.itemsOrdered.add(media);
-			}
-			System.out.println("The disc has been added");
-		}
-		else {
-			System.out.println("The cart is almost full");
-		}
-	}
+//	public void addMedia(Media media, int times) {
+//		if (this.itemsOrdered.size() + times <= MAX_NUMBERS_ORDERED) {
+//			for (int i = 0; i < times; i++) {
+//				this.itemsOrdered.add(media);
+//			}
+//			System.out.println("The disc has been added");
+//		}
+//		else {
+//			System.out.println("The cart is almost full");
+//		}
+//	}
 		
 	// Add two different medias to the current cart
 	public void addMedia(Media media1, Media media2) {
 		if (this.itemsOrdered.size() + 2 <= MAX_NUMBERS_ORDERED) {
-			this.itemsOrdered.add(media1);
-			this.itemsOrdered.add(media2);
-			System.out.println("The medias has been added");
+			if (this.itemsOrdered.contains(media1)) {
+				System.out.println("The media " + media1.getTitle() + " is already in the cart");
+			}
+			else {
+				this.itemsOrdered.add(media1);
+				System.out.println("The media has been added");
+			}
+			if (this.itemsOrdered.contains(media2)) {
+				System.out.println("The media " + media2.getTitle() + " is already in the cart");
+			}
+			else {
+				this.itemsOrdered.add(media2);
+				System.out.println("The media has been added");
+			}
 		}
 		else {
 			System.out.println("The cart is almost full");
@@ -110,15 +139,15 @@ public class Cart {
 					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
 					this.itemsOrdered.set(j, temp);
 				}
-				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) < 0 
-						&& MediaUtils.compareByTitle(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) == 0) {
+				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) == 0 
+						&& MediaUtils.compareByTitle(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) < 0) {
 					temp = this.itemsOrdered.get(i);
 					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
 					this.itemsOrdered.set(j, temp);
 				}
-				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) < 0
+				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) == 0
 						&& MediaUtils.compareByTitle(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) == 0
-						&& MediaUtils.compareByCost(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) == 0) {
+						&& MediaUtils.compareByCost(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) < 0) {
 					temp = this.itemsOrdered.get(i);
 					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
 					this.itemsOrdered.set(j, temp);
@@ -133,6 +162,38 @@ public class Cart {
 		if (this.itemsOrdered.size() < 5) System.out.println(String.format("Total cost: %.3f", this.totalCost()));
 		else System.out.println(String.format("Total cost: %.3f", this.totalCost((getALuckyItem()))));
 		System.out.println("*********************************************************");
+	}
+	
+	// Print the list of ordered items of the cart
+	// Sort the items in the cart by class, alphabetical order, then by cost (decreasing)
+	public ObservableList<Media> display() {
+		System.out.println("**************************CART**************************");
+		System.out.println("Ordered Items:");
+		Media temp;
+		for (int i = 0; i < this.itemsOrdered.size(); i++) {
+			for (int j = i + 1; j < this.itemsOrdered.size(); j++) {
+				if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) < 0) {
+					temp = this.itemsOrdered.get(i);
+					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
+					this.itemsOrdered.set(j, temp);
+				}
+				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) == 0 
+						&& MediaUtils.compareByTitle(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) < 0) {
+					temp = this.itemsOrdered.get(i);
+					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
+					this.itemsOrdered.set(j, temp);
+				}
+				else if (this.itemsOrdered.get(j).getClass().toString().compareTo(this.itemsOrdered.get(i).getClass().toString()) == 0
+						&& MediaUtils.compareByTitle(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) == 0
+						&& MediaUtils.compareByCost(this.itemsOrdered.get(i), this.itemsOrdered.get(j)) < 0) {
+					temp = this.itemsOrdered.get(i);
+					this.itemsOrdered.set(i, this.itemsOrdered.get(j));
+					this.itemsOrdered.set(j, temp);
+				}
+			}
+		}
+		System.out.println("Display all the medias in the cart");
+		return itemsOrdered;
 	}
 	
 	// Sort list of medias in the cart by cost

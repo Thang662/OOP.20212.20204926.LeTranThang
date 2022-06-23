@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public class Media implements Comparable<Media>{
+public abstract class Media implements Comparable<Media>{
 	protected int id;
 	protected String title;
 	protected String category;
@@ -109,4 +109,6 @@ public class Media implements Comparable<Media>{
 		}
 		return 1;
 	}
+	
+	public abstract String getDetails();
 }

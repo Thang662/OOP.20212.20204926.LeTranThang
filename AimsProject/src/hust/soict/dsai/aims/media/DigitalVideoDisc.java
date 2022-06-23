@@ -29,6 +29,14 @@ public class DigitalVideoDisc extends Disc implements Playable {
 		return str;
 	}
 	
+	// Format the way to get dvd's details
+		@Override
+		public String getDetails () {
+			String str = String.format("DVD - Title:%-20s - Category:%-20s - Director:%-20s - Length:%-20d - Cost:%.2f$", this.getTitle(),
+					this.getCategory(), this.getDirector(), this.getLength(), this.getCost());
+			return str;
+		}
+	
 	// Implements play method
 	@Override
 	public void play() {

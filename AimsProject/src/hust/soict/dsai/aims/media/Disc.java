@@ -40,4 +40,10 @@ public class Disc extends Media {
 		return director;
 	}
 
+	@Override
+	public String getDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

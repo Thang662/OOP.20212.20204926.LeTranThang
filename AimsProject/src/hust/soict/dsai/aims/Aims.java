@@ -13,7 +13,7 @@ import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import hust.soict.dsai.aims.screen.CartScreen;
 import hust.soict.dsai.aims.screen.CartScreenController;
-import hust.soict.dsai.aims.screen.StoreScreen;
+import hust.soict.dsai.aims.screen.StoreManagerScreen;
 import hust.soict.dsai.aims.store.Store;
 import javafx.collections.ObservableList;
 public class Aims {
@@ -105,7 +105,7 @@ public class Aims {
 		
 //		anOrder.addMedia(book5, book1, cd1);
 //		new CartScreen(anOrder);
-//		new StoreScreen(store);
+//		new StoreManagerScreen(store);
 		/*
 		 * AIMS Application
 		 * The menu consists 3 parts: Store menu, Update store menu, Cart menu
@@ -155,7 +155,7 @@ public class Aims {
 					else if (storeMenuOption == 2) {
 						tempMediaList = store.display();
 						for (int i = 0; i < tempMediaList.size(); i++) {
-							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).toString());
+							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).getDetails());
 						}
 						System.out.println("----------------------------------------------------------------------------------");
 						System.out.println("Please enter the title of the media to add to the cart:");
@@ -178,7 +178,7 @@ public class Aims {
 						tempMediaList = store.display();
 						for (int i = 0; i < tempMediaList.size(); i++) {
 							playableMedia = (tempMediaList.get(i) instanceof Playable) ? " - Playble" : "";
-							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).toString() + playableMedia);
+							System.out.println(String.format("%02d", i + 1) + "." + tempMediaList.get(i).getDetails() + playableMedia);
 						}
 						System.out.println("----------------------------------------------------------------------------------");
 						System.out.println("Please enter the title of the media in the store to play:");

@@ -99,6 +99,14 @@ public class Book extends Media {
 	public String toString() {
 		String str = String.format("Book - Title:%-20s - Category:%-20s - Author(s):%-20s - Content length:%-10d - Cost:%.2f$", this.getTitle(),
 				this.getCategory(), this.getAuthors(), this.processContent().values().stream().collect(Collectors.summingInt(Integer::intValue)), this.getCost());
+		str += " - Token list: " + this.processContent().keySet() + " - Words frequency: " + this.processContent();
+		return str;
+	}
+	
+	@Override
+	public String getDetails () {
+		String str = String.format("Book - Title:%-20s - Category:%-20s - Author(s):%-20s - Content length:%-10d - Cost:%.2f$", this.getTitle(),
+				this.getCategory(), this.getAuthors(), this.processContent().values().stream().collect(Collectors.summingInt(Integer::intValue)), this.getCost());
 		return str;
 	}
 }

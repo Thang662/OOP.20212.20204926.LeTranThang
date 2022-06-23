@@ -157,7 +157,7 @@ public class Cart {
 		
 		System.out.println(this.itemsOrdered.size());
 		for (int i=0; i < this.itemsOrdered.size(); i++) {
-			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).toString());
+			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).getDetails());
 		}
 		if (this.itemsOrdered.size() < 5) System.out.println(String.format("Total cost: %.3f", this.totalCost()));
 		else System.out.println(String.format("Total cost: %.3f", this.totalCost((getALuckyItem()))));
@@ -216,7 +216,7 @@ public class Cart {
 		}
 		System.out.println("Items in cart sorted by cost: ");
 		for (int i = 0; i < this.itemsOrdered.size(); i++) {
-			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).toString());
+			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).getDetails());
 		}
 	}
 	
@@ -240,7 +240,7 @@ public class Cart {
 		}
 		System.out.println("Items in cart sorted by title alphabetically: ");
 		for (int i = 0; i < this.itemsOrdered.size(); i++) {
-			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).toString());
+			System.out.println(String.format("%02d", i + 1) + "." + this.itemsOrdered.get(i).getDetails());
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class CompactDisc extends Disc implements Playable {
 	private String artist;
@@ -44,6 +45,10 @@ public class CompactDisc extends Disc implements Playable {
 		return artist;
 	}
 	
+	public ArrayList<Track> getTracks() {
+		return tracks;
+	}
+	
 	// Add track to the tracks list
 	public void addTrack(Track track) {
 		if (track == null) {
@@ -82,6 +87,7 @@ public class CompactDisc extends Disc implements Playable {
 		return totalLength;
 	}
 	
+	// Implements play method
 	@Override
 	public void play() {
 		if (this.getLength() <= 0) {
@@ -99,7 +105,18 @@ public class CompactDisc extends Disc implements Playable {
 	// Format the way to print cd
 	@Override
 	public String toString() {
-		String str = String.format("CD - Title:%-20s - Category:%-20s - Artist:%-20s - Director:%-20s - Length:%-10d - Cost:%.2f$", this.getTitle(),
+		String str = String.format("CD - Title:%-20s - Category:%-20s - Artist:%-20s - Director:%-20s - Length:%-10d - Cost:%.2f$\n", this.getTitle(),
+				this.getCategory(),this.getArtist(), this.getDirector(), this.getLength(), this.getCost());
+		for (Track track: this.getTracks()) {
+			str += "Track - Title:" + track.getTitle() + " - Length: " + track.getLength();
+		}
+		return str;
+	}
+	
+	// Format the way to get cd's details
+	@Override
+	public String getDetails () {
+		String str = String.format("CD - Title:%-20s - Category:%-20s - Artist:%-20s - Director:%-20s - Length:%-10d - Cost:%.2f$\n", this.getTitle(),
 				this.getCategory(),this.getArtist(), this.getDirector(), this.getLength(), this.getCost());
 		return str;
 	}

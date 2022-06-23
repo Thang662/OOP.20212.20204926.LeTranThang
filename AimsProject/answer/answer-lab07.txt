@@ -1,0 +1,10 @@
+- Compare the top-level containers in Swing and AWT:
+=> Top-level container in Swing is JFrame, while in AWT is Frame
+- Compare the class name of components in AWT and the corresponding class’s name in Swing:
+=> Class name of components in Swing is similar to AWT, but they have a letter "J" at the start
+- Compare the event-handling of Swing and AWT applications:
+=> The event-handling of Swing and AWT is the same, they both use event-handling of AWT
+- The resulting appearances of the applications developed using Swing and AWT might be different as well. 
+Make comparisons:
+=> + The background of AWT is white, and the background of Swing is a little grey
+   + We can close the window using the exit button at the top rigth corner in Swing, but we can't in AWT

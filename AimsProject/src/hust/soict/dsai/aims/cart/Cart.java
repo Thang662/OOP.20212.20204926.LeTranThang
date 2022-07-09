@@ -1,12 +1,10 @@
 package hust.soict.dsai.aims.cart;
-import java.util.ArrayList;
-import hust.soict.dsai.aims.media.Media;
 
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.utils.MediaUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
+import javax.naming.LimitExceededException;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
@@ -20,8 +18,12 @@ public class Cart {
 	}
 	
 	// Add a single media to the current cart
-	public void addMedia(Media media) {
-		if (this.itemsOrdered.size() + 1 <= MAX_NUMBERS_ORDERED & !(this.itemsOrdered.contains(media))) {
+	public void addMedia(Media media) throws LimitExceededException, NullPointerException{
+		if (media == null) {
+			System.out.println("Can not add a null object to the cart");
+			throw new NullPointerException("ERROR: null object");
+		}
+		else if (this.itemsOrdered.size() + 1 <= MAX_NUMBERS_ORDERED & !(this.itemsOrdered.contains(media))) {
 			this.itemsOrdered.add(media);
 			System.out.println("The media has been added");
 		}
@@ -30,14 +32,19 @@ public class Cart {
 		}
 		else {
 			System.out.println("The cart is almost full");
+			throw new LimitExceededException("ERROR: The number of media has reached its limit");
 		}
 	}
 	
 	// Add a list of medias to the current cart 
-	public void addMedia(Media... medias) {
+	public void addMedia(Media... medias) throws LimitExceededException, NullPointerException{
 		if (this.itemsOrdered.size() + medias.length <= MAX_NUMBERS_ORDERED) {
 			for (Media media: medias) {
-				if (this.itemsOrdered.contains(media)) {
+				if (media == null) {
+					System.out.println("Can not add a null object to the cart");
+					throw new NullPointerException("ERROR: null object");
+				}
+				else if (this.itemsOrdered.contains(media)) {
 					System.out.println("The media " + media.getTitle() + " is already in the cart");
 				}
 				else {
@@ -48,6 +55,7 @@ public class Cart {
 		}
 		else {
 			System.out.println("The cart is almost full");
+			throw new LimitExceededException("ERROR: The number of media has reached its limit");
 		}
 	}
 		
@@ -65,9 +73,13 @@ public class Cart {
 //	}
 		
 	// Add two different medias to the current cart
-	public void addMedia(Media media1, Media media2) {
+	public void addMedia(Media media1, Media media2) throws LimitExceededException, NullPointerException {
 		if (this.itemsOrdered.size() + 2 <= MAX_NUMBERS_ORDERED) {
-			if (this.itemsOrdered.contains(media1)) {
+			if (media1 == null || media2 == null) {
+				System.out.println("Can not add a null object to the cart");
+				throw new NullPointerException("ERROR: null object");
+			}
+			else if (this.itemsOrdered.contains(media1)) {
 				System.out.println("The media " + media1.getTitle() + " is already in the cart");
 			}
 			else {
@@ -84,6 +96,7 @@ public class Cart {
 		}
 		else {
 			System.out.println("The cart is almost full");
+			throw new LimitExceededException("ERROR: The number of media has reached its limit");
 		}
 	}
 	

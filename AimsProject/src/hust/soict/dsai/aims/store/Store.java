@@ -14,10 +14,15 @@ public class Store {
 	}
 	
 	// Add a list of media
-	public  void addMedia(Media... medias) {
+	public  void addMedia(Media... medias) throws NullPointerException {
 		for (Media media: medias){
-			itemsInStore.add(media);
-			System.out.println("The media has been added to the store");
+			if (media == null) {
+				throw new NullPointerException("ERROR: null object");
+			}
+			else {
+				itemsInStore.add(media);
+				System.out.println("The media has been added to the store");
+			}
 		}
 	}
 	

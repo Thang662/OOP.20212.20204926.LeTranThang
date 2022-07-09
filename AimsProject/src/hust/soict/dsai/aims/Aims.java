@@ -5,20 +5,23 @@ import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
-import hust.soict.dsai.aims.screen.CartScreen;
-import hust.soict.dsai.aims.screen.CartScreenController;
-import hust.soict.dsai.aims.screen.StoreManagerScreen;
+//import hust.soict.dsai.aims.screen.customer.CartScreen;
+import hust.soict.dsai.aims.screen.customer.controller.CartController;
+import hust.soict.dsai.aims.screen.manager.StoreManagerScreen;
 import hust.soict.dsai.aims.store.Store;
 import javafx.collections.ObservableList;
 public class Aims {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws LimitExceededException, NullPointerException, PlayerException {
 //		// Create a new cart
 //		Cart anOrder = new Cart();
 //		// Create a new dvd object and add them to the cart

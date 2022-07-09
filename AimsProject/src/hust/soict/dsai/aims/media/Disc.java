@@ -8,8 +8,11 @@ public class Disc extends Media {
 	}
 	
 	// Constructor with title, category, director, length, cost
-	public Disc(String title, String category, String director, int length, float cost) {
+	public Disc(String title, String category, String director, int length, float cost) throws IllegalArgumentException {
 		super(title, category, cost);
+		if (length < 0) {
+			throw new IllegalArgumentException("ERROR: the length must be non-negative");
+		}
 		this.length = length;
 		this.director = director;
 	}

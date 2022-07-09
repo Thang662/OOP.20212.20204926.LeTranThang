@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import javax.naming.LimitExceededException;
+
 public class Book extends Media {
 	private ArrayList<String> authors = new ArrayList<String>();
 	private String content;
@@ -55,9 +57,10 @@ public class Book extends Media {
 	}
 	
 	// Add author(s) to the book
-	public void addAuthor(String authorName) {
+	public void addAuthor(String authorName) throws IllegalArgumentException {
 		if (authors.contains(authorName)) {
 			System.out.println("The author's name is already in the book");
+			throw new IllegalAccessError("ERROR: author is already in the list");
 		}
 		else {
 			authors.add(authorName);
@@ -66,9 +69,10 @@ public class Book extends Media {
 	}
 	
 	// Remove author(s) from the book
-	public void removeAuthor(String authorName) {
+	public void removeAuthor(String authorName) throws LimitExceededException {
 		if (authors.isEmpty()) {
 			System.out.println("There isn't any author for this book");
+			throw new LimitExceededException("ERROR: the list of authors is empty");
 		}
 		else if (authors.contains(authorName)) {
 			authors.remove(authorName);

@@ -1,4 +1,4 @@
-package hust.soict.dsai.aims.screen;
+package hust.soict.dsai.aims.screen.manager;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import hust.soict.dsai.aims.media.Book;
-import hust.soict.dsai.aims.media.CompactDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.store.Store;
 
-public class AddCompactDiscToStore extends AddItemToStore{
-	public AddCompactDiscToStore(Store store) {
+public class AddDigitalVideoDiscToStore extends AddItemToStore{
+	public AddDigitalVideoDiscToStore(Store store) {
 		super(store);
 		// TODO Auto-generated constructor stub
 	}
@@ -47,11 +47,10 @@ public class AddCompactDiscToStore extends AddItemToStore{
 			}
 		});
 		
-		
-		JButton addCDButton = new JButton("Add CD");
-		addCDButton.setPreferredSize(new Dimension(100, 50));
-		addCDButton.setMaximumSize(new Dimension(100, 50));
-		addCDButton.addActionListener(new ActionListener() {
+		JButton addDVDButton = new JButton("Add DVD");
+		addDVDButton.setPreferredSize(new Dimension(100, 50));
+		addDVDButton.setMaximumSize(new Dimension(100, 50));
+		addDVDButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,8 +58,8 @@ public class AddCompactDiscToStore extends AddItemToStore{
 				taTitleInput.setText("");
 				taCostInput.setText("");
 				taCategoryInput.setText("");
-				store.addMedia(new CompactDisc(taTitleInput.getText(), taCategoryInput.getText(), Float.parseFloat(taCostInput.getText())));
-				JOptionPane.showMessageDialog(null, "The CD has been added to the store");
+				store.addMedia(new DigitalVideoDisc(taTitleInput.getText(), taCategoryInput.getText(), Float.parseFloat(taCostInput.getText())));
+				JOptionPane.showMessageDialog(null, "The DVD has been added to the store");
 			}
 		});
 		
@@ -69,7 +68,7 @@ public class AddCompactDiscToStore extends AddItemToStore{
 		header.add(Box.createHorizontalGlue());
 		header.add(storeButton);
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
-		header.add(addCDButton);
+		header.add(addDVDButton);
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 		return header;
 	}

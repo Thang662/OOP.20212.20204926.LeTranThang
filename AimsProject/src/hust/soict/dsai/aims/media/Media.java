@@ -79,7 +79,7 @@ public abstract class Media implements Comparable<Media>{
 		String[] tokens2 = title.split(" ");
 		for (int i = 0; i < tokens1.length; i++) {
 			for (int j = 0; j < tokens2.length; j++) {
-				if (tokens1[i].equalsIgnoreCase(tokens2[j])) {
+				if (tokens1[i].toLowerCase().contains(tokens2[j].toLowerCase())) {
 					check = true;
 					break;
 				}
@@ -99,9 +99,12 @@ public abstract class Media implements Comparable<Media>{
 	}
 
 	@Override
-	public int compareTo(Media media) {
+	public int compareTo(Media media) throws NullPointerException {
 		// TODO Auto-generated method stub
-		if (this.getTitle().compareTo(media.getTitle()) < 0) {
+		if (media == null) {
+			throw new NullPointerException("ERROR: null object");
+		}
+		else if (this.getTitle().compareTo(media.getTitle()) < 0) {
 			return -1;
 		}
 		else if (this.getTitle().compareTo(media.getTitle()) == 0 & this.getCategory().compareTo(media.getCategory()) < 0) {

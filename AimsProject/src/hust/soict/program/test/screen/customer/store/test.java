@@ -1,16 +1,39 @@
-package hust.soict.dsai.aims;
+package hust.soict.program.test.screen.customer.store;
 
+import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
-import hust.soict.dsai.aims.screen.StoreManagerScreen;
+import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.screen.customer.controller.ItemController;
+import hust.soict.dsai.aims.screen.customer.controller.ViewStoreController;
 import hust.soict.dsai.aims.store.Store;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class ScreenTest {
-
+public class test extends Application{
+	private static Media media;
+	private static Cart cart;
+	
+	@Override 
+	public void start(Stage primaryStage) throws Exception {
+		final String STORE_FXML_FILE_PATH = "/hust/soict/dsai/aims/screen/customer/view/Item.fxml";
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(STORE_FXML_FILE_PATH));
+		ItemController itemController = new ItemController();
+		itemController.setData(media, cart);
+		fxmlLoader.setController(itemController);
+		Parent root = fxmlLoader.load();
+		
+		primaryStage.setTitle("Store :");
+		primaryStage.setScene(new Scene(root));
+		primaryStage.show();
+	}
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Store store = new Store();
 		String content = "The seeds for the eventual rise of the evil Empire are sown in a seemingly routine place: a trade dispute between the Republic and the Trade Federation. Two Jedi, the keepers of peace and justice, are dispatched to negotiate the dispute, but (wait for it) it's a trap! They end up barely escaping with their lives, though they do meet R2-D2, who saves their lives. They end up on remote Tatooine, where they meet slave boy Anakin Skywalker and his protocol droid C3PO. Jedi Qui-Gon Jinn senses the Force in Anakin - and believes he's the \"Chosen One\" who will bring balance to the Force. There's a podrace and Anakin is freed. Qui-Gon wants to train Anakin, but the Jedi Council knows something is up with this boy and rejects it. But he helps the Republic win a battle against the Trade Federation so the Council lets Obi-Wan Kenobi take him as his apprentice.";
 		String content1 = "Some people believe that technology has made man more social. To what extent do you agree or disagree with this opinion?\r\n"
 				+ "\r\n"
@@ -46,12 +69,8 @@ public class ScreenTest {
 		Book book3 = new Book("Aladin2", "Animation", 18.99f);
 		Book book4 = new Book("King Kong2", "Act1ion", 20.99f);
 		Book book5 = new Book("Spider-Man2", "Action", 20.99f, content1);
-		
-		store.addMedia(dvd1, dvd2, dvd3, dvd4, dvd5, cd1, cd2, cd3, cd4, cd5, book1, book2, book3, book4, book5);
-		
-//		anOrder.addMedia(book5, book1, cd1);
-//		new CartScreen(anOrder);
-		new StoreManagerScreen(store);
+		media = new Book("Spider-Man2", "Action", 20.99f, content1);;
+//		store.addMedia(dvd1, dvd2, dvd3, dvd4, dvd5, cd1, cd2, cd3, cd4, cd5, book1, book2, book3, book4, book5);
+		launch(args);
 	}
-
 }
